@@ -7,11 +7,15 @@ body {
   margin-right: 5%;
 }
 
+header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 header>img {
   width: 80px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 
 footer>img {
@@ -24,26 +28,26 @@ h1 {
 
 
 nav ul {
-  margin-top: 50px;
   list-style: none;
   text-align: center;
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 
 nav li {
   display: inline-block;
-  font-size: 1.8rem;
-
 }
 
 nav li a {
   text-decoration: none;
   color: rgb(11, 94, 37);
+  cursor: pointer;
 }
 
 a:hover {
   color: rgb(12, 13, 13);
+
 }
 
 section {
