@@ -7,18 +7,26 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import BookingPage from './pages/BookingPage';
+import { ChakraProvider } from '@chakra-ui/react'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
+  {
+    path: "/booking",
+    element: <BookingPage />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
 );
 
