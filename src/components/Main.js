@@ -20,6 +20,8 @@ import {
     Card,
     HStack,
     Divider,
+    extendTheme,
+    Flex
 
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -54,33 +56,40 @@ const testimonials = [
         rating: "⭐⭐⭐⭐",
         name: "Tony",
         review:
-            "Mollit magna nulla ullamco elit quis deserunt mollit ut non proident consequat cupidatat. Cillum enim irure et veniam dolore sit proident in exercitation qui et amet. Exercitation adipisicing cillum elit esse anim dolore pariatur. Magna laborum aliquip pariatur officia velit fugiat proident adipisicing Lorem eu culpa velit enim consectetur. ",
+            "Velit deserunt tempor et pariatur dolore labore.",
         getImageSrc: () => require("../images/avatar1.jpg"),
     },
     {
         rating: "⭐⭐⭐⭐⭐",
         name: "Lucy",
         review:
-            "Incididunt officia qui amet ipsum sint incididunt culpa ut consequat enim id. Ex tempor commodo consectetur do est nisi in Lorem ullamco cillum. Fugiat adipisicing sint ipsum quis sit cillum cillum ut nulla exercitation. Do esse nostrud incididunt duis irure.",
+            "Ex deserunt est minim tempor sunt laboris Lorem.",
         getImageSrc: () => require("../images/avatar2.jpg"),
     },
     {
         rating: "⭐⭐⭐",
         name: "Marta",
         review:
-            "Cillum nisi minim ipsum voluptate aute aute labore ea. Commodo dolore occaecat minim elit fugiat do veniam excepteur adipisicing sint eu. Eu exercitation veniam duis duis voluptate mollit veniam proident dolor proident labore voluptate sit ex.",
+            "Officia proident reprehenderit et duis veniam.",
         getImageSrc: () => require("../images/avatar3.jpg"),
     },
     {
         rating: "⭐⭐⭐⭐⭐",
         name: "Billy",
         review:
-            "Ea aute aute aute elit tempor adipisicing consectetur ea. Et ex exercitation incididunt non aliqua ipsum nisi dolore consequat laborum commodo voluptate. Minim eiusmod id dolore consectetur cupidatat veniam excepteur nisi ea excepteur id excepteur ea. Labore voluptate officia reprehenderit qui Lorem enim nulla laborum in anim quis ut officia dolore. Commodo eiusmod id culpa elit enim ut aute culpa duis ad et. Veniam elit aute ullamco voluptate ipsum cupidatat.",
+            "Magna elit incididunt occaecat labore et sit anim do mollit.",
         getImageSrc: () => require("../images/avatar4.jpg"),
     },
 ];
 
-
+const breakpoints = {
+    sm: '320px',
+    md: '768px',
+    lg: '960px',
+    xl: '1200px',
+    '2xl': '1536px',
+}
+const theme = extendTheme({ breakpoints })
 
 function Main() {
 
@@ -94,31 +103,30 @@ function Main() {
                         bgRepeat="no-repeat"
                         bgPosition="bottom"
                         bgSize="cover"
-                        height={350}
-                        textAlign="center"
+                        height={450}
+                        textAlign="start"
                         display="flex"
-                        alignContent="center"
+                        alignItems="center"
                     >
-                        <HStack gap={5}>
-                            <VStack>
-                                <Heading as="h1" id="reservations-section">
-                                    Little Lemon
-                                </Heading>
-                                <h3>Chicago</h3>
-                                <p>Fugiat proident voluptate sint dolor ipsum sint dolor aliqua deserunt quis exercitation ullamco ipsum. Do id reprehenderit irure esse amet. Qui minim officia occaecat aliqua eiusmod sunt duis duis.</p>
-                                <Link to={"/booking"}>
-                                    <Button colorScheme='teal' size='md'>
-                                        Reserve a Table
-                                    </Button>
-                                </Link>
-                            </VStack>
-                        </HStack>
-
+                        <VStack display="flex" alignItems="flex-start">
+                            <Heading as="h1" id="reservations-section">
+                                Little Lemon
+                            </Heading>
+                            <Heading as='h4' size='md'>
+                                Chicago
+                            </Heading>
+                            <Text w="80%" py={5}>Adipisicing sint Lorem esse cillum tempor amet amet elit nostrud culpa cupidatat. Eu tempor duis nisi proident officia duis laborum. Mollit sint adipisicing sunt ad eiusmod ut voluptate fugiat elit minim. Laboris quis Lorem enim ad velit laborum.</Text>
+                            <Link to={"/booking"}>
+                                <Button colorScheme='teal' size='md'>
+                                    Reserve a Table
+                                </Button>
+                            </Link>
+                        </VStack>
                     </Box>
                 </section>
                 <section>
                     <VStack p={10}>
-                        <HStack>
+                        <HStack gap={50}>
                             <Heading as="h1" id="orderonline-section" py={10}>
                                 Specials
                             </Heading>
@@ -126,36 +134,48 @@ function Main() {
                                 Online Menu
                             </Button>
                         </HStack>
-                        <HStack spacing={5}>
+                        <Box spacing={5}
+                            display={{ md: 'flex' }}
+                            flexWrap="wrap"
+                            gap={5}
+                        >
                             {menus.map((menu) => (
+                                <Card w="350px"
+                                    key={menu.title}
+                                    alignSelf="flex-start"
+                                    mt={{ sm: 5 }}
 
-                                <Card w="100%" key={menu.title}>
+                                >
                                     <CardBody>
                                         <Image
                                             src={menu.getImageSrc()}
                                             borderRadius='lg'
                                         />
                                         <Stack mt='6' spacing='3'>
-                                            <Heading size='md'>{menu.title}</Heading>
+                                            <HStack display="flex" justifyContent="space-between">
+                                                <Heading size='md'>{menu.title}</Heading>
+                                                <Text color='blue.600' fontSize='2xl'>
+                                                    $ {menu.price}
+                                                </Text>
+                                            </HStack>
+
                                             <Text>
                                                 {menu.description}
                                             </Text>
-                                            <Text color='blue.600' fontSize='2xl'>
-                                                {menu.price}
-                                            </Text>
+
                                         </Stack>
                                     </CardBody>
                                     <CardFooter>
                                         <ButtonGroup spacing='2'>
-                                            <Button variant='solid' colorScheme='blue'>
-                                                Order a delivery
+                                            <Button variant='solid' colorScheme='facebook'>
+                                                Order delivery
                                             </Button>
-                                            <FaMotorcycle />
+                                            <Button fontSize={30} variant='ghost'><FaMotorcycle /></Button>
                                         </ButtonGroup>
                                     </CardFooter>
                                 </Card>
-
-                            ))} </HStack>
+                            ))}
+                        </Box>
                     </VStack>
                 </section>
                 <section>
@@ -201,19 +221,23 @@ function Main() {
                 <section>
                     <Box
                         p={10}
-
                         bgGradient="linear(red.100 0%, orange.100 25%, yellow.100 50%)"
+                        width="100%"
                     >
-                        <HStack gap={10}>
+                        <Box p={4} display={{ md: 'flex' }} gap={10}>
                             <VStack>
                                 <Heading as="h1" id="about-section">
                                     Little Lemon
                                 </Heading>
-                                <h3>Chicago</h3>
-                                <p>Fugiat proident voluptate sint dolor ipsum sint dolor aliqua deserunt quis exercitation ullamco ipsum. Do id reprehenderit irure esse amet. Qui minim officia occaecat aliqua eiusmod sunt duis duis.</p>
+                                <Heading as='h4' size='md' pb={10} >
+                                    Chicago
+                                </Heading>
+                                <Text>Sunt consectetur mollit do officia magna deserunt consequat ipsum laboris culpa sit reprehenderit officia culpa. Minim adipisicing commodo excepteur Lorem commodo cillum minim minim tempor et incididunt voluptate. Nisi amet voluptate amet excepteur. Do dolor eiusmod qui quis est fugiat enim ea enim incididunt. Cillum eiusmod cupidatat eiusmod non dolore. Incididunt amet Lorem non pariatur velit occaecat ex voluptate enim proident. Cupidatat esse laboris duis labore eu ipsum ad duis.</Text>
                             </VStack>
-                            <Image src={require("../assets/images/section4.jpg")} />
-                        </HStack>
+                            <Box flexShrink={0} pt={{ sm: 10 }}>
+                                <Image src={require("../assets/images/section4.jpg")} />
+                            </Box>
+                        </Box>
                     </Box>
                 </section>
             </main>

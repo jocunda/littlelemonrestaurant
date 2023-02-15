@@ -13,11 +13,14 @@ import {
     NumberInputField,
     NumberInputStepper,
     NumberIncrementStepper,
-    NumberDecrementStepper
+    NumberDecrementStepper,
+    HStack
 
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { AiOutlineHome } from "react-icons/ai"
+import { Link } from "react-router-dom";
 
 const availableTimes = [
     {
@@ -77,9 +80,16 @@ function BookingPage() {
     return <>
 
         <VStack p={32} alignItems="flex-start">
-            <Heading as="h1">
-                Reservation
-            </Heading>
+            <HStack display="flex"
+                w="100%"
+                justifyContent="space-between"
+            >
+                <Heading as="h1">
+                    Reservation
+                </Heading>
+                <Link to={"/"}><Button fontSize={25} p={5}><AiOutlineHome /></Button></Link>
+            </HStack>
+
             <Box p={6} rounded="md" w="100%">
                 <form onSubmit={(e) => {
                     e.preventDefault()
@@ -116,8 +126,8 @@ function BookingPage() {
                             </Select>
                         </FormControl>
 
-                        <Button type="submit" colorScheme="purple" width="full">
-                            Make Your reservation
+                        <Button type="submit" colorScheme="teal" size='lg' py={8}>
+                            Make Your Reservation
                         </Button>
                     </VStack>
                 </form>
