@@ -20,7 +20,6 @@ import {
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { AiOutlineHome } from "react-icons/ai"
-import { Link } from "react-router-dom";
 import UpdateTimes from "./UpdateTimes";
 
 
@@ -62,7 +61,7 @@ function BookingPage() {
                 <Heading as="h1">
                     Reservation
                 </Heading>
-                <Link to={"/"}><Button fontSize={25} p={5}><AiOutlineHome /></Button></Link>
+                <Button fontSize={25} p={5}><a href="/"><AiOutlineHome /></a></Button>
             </HStack>
 
             <Box p={6}
@@ -88,7 +87,6 @@ function BookingPage() {
                                 </NumberInputStepper>
                             </NumberInput>
                         </FormControl>
-
                         <FormControl>
                             <FormLabel htmlFor="occasion">Occasion</FormLabel>
                             <Select id="occasion" name="occasion" >

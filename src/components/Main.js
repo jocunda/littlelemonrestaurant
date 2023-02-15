@@ -33,7 +33,7 @@ import {
 
 
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+
 import { FaMotorcycle } from 'react-icons/fa'
 import { WiTime7 } from 'react-icons/wi'
 import UpdateTimes from "./UpdateTimes";
@@ -128,11 +128,9 @@ function Main() {
                                 Chicago
                             </Heading>
                             <Text w="70%" py={5}>Adipisicing sint Lorem esse cillum tempor amet amet elit nostrud culpa cupidatat. Eu tempor duis nisi proident officia duis laborum. Mollit sint adipisicing sunt ad eiusmod ut voluptate fugiat elit minim. Laboris quis Lorem enim ad velit laborum.</Text>
-                            <Link to={"/booking"}>
-                                <Button colorScheme='teal' size='md'>
-                                    Reserve a Table
-                                </Button>
-                            </Link>
+                            <Button colorScheme='teal' size='md'>
+                                <a href="/booking">Reserve a Table</a>
+                            </Button>
                         </VStack>
                         <Popover>
                             <PopoverTrigger>
