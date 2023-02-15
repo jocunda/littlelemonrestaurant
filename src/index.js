@@ -7,7 +7,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import BookingPage from './pages/BookingPage';
+import BookingPage from './components/BookingPage';
 import { ChakraProvider } from '@chakra-ui/react'
 
 const router = createBrowserRouter([

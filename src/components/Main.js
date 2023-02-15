@@ -21,11 +21,22 @@ import {
     HStack,
     Divider,
     extendTheme,
-    Flex
+    Flex,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+
 
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaMotorcycle } from 'react-icons/fa'
+import { WiTime7 } from 'react-icons/wi'
+import UpdateTimes from "./UpdateTimes";
 
 const menus = [
     {
@@ -91,13 +102,15 @@ const breakpoints = {
 }
 const theme = extendTheme({ breakpoints })
 
+
 function Main() {
+
 
     return (
         <>
             <main>
                 <section>
-                    <Box
+                    <HStack
                         p={10}
                         bgImage={require("../assets/images/section1a.jpg")}
                         bgRepeat="no-repeat"
@@ -105,9 +118,8 @@ function Main() {
                         bgSize="cover"
                         height={450}
                         textAlign="start"
-                        display="flex"
-                        alignItems="center"
                     >
+
                         <VStack display="flex" alignItems="flex-start">
                             <Heading as="h1" id="reservations-section">
                                 Little Lemon
@@ -115,14 +127,37 @@ function Main() {
                             <Heading as='h4' size='md'>
                                 Chicago
                             </Heading>
-                            <Text w="80%" py={5}>Adipisicing sint Lorem esse cillum tempor amet amet elit nostrud culpa cupidatat. Eu tempor duis nisi proident officia duis laborum. Mollit sint adipisicing sunt ad eiusmod ut voluptate fugiat elit minim. Laboris quis Lorem enim ad velit laborum.</Text>
+                            <Text w="70%" py={5}>Adipisicing sint Lorem esse cillum tempor amet amet elit nostrud culpa cupidatat. Eu tempor duis nisi proident officia duis laborum. Mollit sint adipisicing sunt ad eiusmod ut voluptate fugiat elit minim. Laboris quis Lorem enim ad velit laborum.</Text>
                             <Link to={"/booking"}>
                                 <Button colorScheme='teal' size='md'>
                                     Reserve a Table
                                 </Button>
                             </Link>
                         </VStack>
-                    </Box>
+                        <Popover>
+                            <PopoverTrigger>
+                                <Button
+                                    colorScheme='green'
+                                    py={8}
+                                    fontSize={{ base: 150, lg: 80 }}
+                                >
+                                    <WiTime7 />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                                <PopoverArrow />
+                                <PopoverCloseButton />
+                                <PopoverHeader>
+                                    <Heading as='h4' size='md' >
+                                        Available Time
+                                    </Heading>
+                                </PopoverHeader>
+                                <PopoverBody>
+                                    <UpdateTimes />
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Popover>
+                    </HStack>
                 </section>
                 <section>
                     <VStack p={10}>
