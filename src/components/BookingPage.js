@@ -14,42 +14,57 @@ import {
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
-    HStack
+    HStack,
 
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { AiOutlineHome } from "react-icons/ai"
 import UpdateTimes from "./UpdateTimes";
-
+import useSubmit from "../hooks/useSubmit";
 
 
 function BookingPage() {
+    const { loading, response, submit } = useSubmit();
 
     const formik = useFormik({
         initialValues: {
-            firstName: '',
+            name: '',
             email: '',
-            type: '',
-            comment: '',
+            date: '',
+            time: '',
+            guests: 0,
+            occasion: ''
         },
         onSubmit: (values) => {
-
+            submit('https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js', values)
         },
         validationSchema: Yup.object().shape({
-            firstName: Yup.string()
+            name: Yup.string()
                 .min(2, 'First name must be at least 2 characters long')
                 .required("Required"),
             email: Yup.string()
                 .email("Invalid email address")
                 .required("Required"),
-            type: Yup.string(),
-            comment: Yup.string()
-                .min(25, "Must be at least 25 characters")
+            date: Yup.string(),
+            time: Yup.string(),
+            guests: Yup.string()
+                .min(1, "Must be at least 1 guest")
+                .max(10, "Maximum 10 guests")
                 .required("Required"),
+            occasion: Yup.string()
         }),
 
     });
+
+    // useEffect(() => {
+    //     if (response) {
+    //         onOpen(response.type, response.message);
+    //         if (response.type === "success") {
+    //             formik.resetForm()
+    //         }
+    //     }
+    // }, [response])
 
     return <>
 
@@ -72,12 +87,34 @@ function BookingPage() {
                     e.preventDefault()
                     formik.handleSubmit(e)
                 }}>
-                    <VStack spacing={4}>
-                        <HStack>
+                    <VStack
+                        spacing={4}
+                    >
+                        <FormControl isInvalid={formik.touched.name && formik.errors.name}>
+                            <FormLabel htmlFor="name">Name</FormLabel>
+                            <Input
+                                id="name"
+                                name="name"
+                                {...formik.getFieldProps('name')}
+                            />
+                            {formik.errors.name ? <FormErrorMessage>{formik.errors.name}</FormErrorMessage> : null}
+                        </FormControl>
+                        <FormControl isInvalid={formik.touched.email && formik.errors.email}>
+                            <FormLabel htmlFor="email">Email Address</FormLabel>
+                            <Input
+                                id="email"
+                                name="email"
+                                type="email"
+                                {...formik.getFieldProps('email')}
+                            />
+                            {formik.errors.email ? <FormErrorMessage>{formik.errors.email}</FormErrorMessage> : null}
+                        </FormControl>
+
+                        <HStack width="100%">
                             <UpdateTimes />
                         </HStack>
 
-                        <FormControl>
+                        <FormControl isInvalid={formik.touched.guests && formik.errors.guests}>
                             <FormLabel htmlFor="guests">Number of guests</FormLabel>
                             <NumberInput max={10} min={1}>
                                 <NumberInputField />
@@ -86,6 +123,7 @@ function BookingPage() {
                                     <NumberDecrementStepper />
                                 </NumberInputStepper>
                             </NumberInput>
+                            {formik.errors.guests ? <FormErrorMessage>{formik.errors.guests}</FormErrorMessage> : null}
                         </FormControl>
                         <FormControl>
                             <FormLabel htmlFor="occasion">Occasion</FormLabel>
@@ -95,13 +133,22 @@ function BookingPage() {
                             </Select>
                         </FormControl>
 
-                        <Button
-                            type="submit"
+                        {loading ? <Button
+                            isLoading
+                            loadingText='Loading'
                             colorScheme="teal"
                             size='lg'
+                            width="250px"
                             py={8}>
-                            Make Your Reservation
-                        </Button>
+                        </Button> :
+                            <Button
+                                type="submit"
+                                colorScheme="teal"
+                                size='lg'
+                                width="250px"
+                                py={8}>
+                                Make Your Reservation
+                            </Button>}
                     </VStack>
                 </form>
             </Box>
