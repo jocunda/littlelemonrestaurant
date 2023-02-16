@@ -16,4 +16,4 @@ Project from course Front-End Developer by Meta, which requirement is to build w
 
 **Form Validation**
 
-<img src="https://github.com/jocunda/littlelemonrestaurant/blob/main/src/assets/readme-images/3.png" width="300px">
+<img src="https://github.com/jocunda/littlelemonrestaurant/blob/main/src/assets/readme-images/3.gif" width="250px">
