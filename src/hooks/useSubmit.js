@@ -2,10 +2,16 @@ import { useState } from "react";
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/**
- * This is a custom hook that can be used to submit a form and simulate an API call
- * It uses Math.random() to simulate a random success or failure, with 50% chance of each
- */
+const fetchData = async () => {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const useSubmit = () => {
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
@@ -15,18 +21,18 @@ const useSubmit = () => {
         setLoading(true);
         try {
             await wait(2000);
-            if (random < 0.5) {
+            if (false) {
                 throw new Error("Something went wrong");
-
             }
             setResponse({
                 type: 'success',
-                message: `Thanks for your submission ${data.firstName}, we will get back to you shortly!`,
+                message: `Thank you ${data.name}, booking was successfully submitted!`,
             })
+
         } catch (error) {
             setResponse({
                 type: 'error',
-                message: 'Something went wrong, please try again later!',
+                message: 'Booking submission failed.',
             })
         } finally {
             setLoading(false);

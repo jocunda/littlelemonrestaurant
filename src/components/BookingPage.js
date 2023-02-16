@@ -15,6 +15,9 @@ import {
     NumberIncrementStepper,
     NumberDecrementStepper,
     HStack,
+    Text,
+    Alert,
+    AlertIcon,
 
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
@@ -22,6 +25,8 @@ import * as Yup from 'yup';
 import { AiOutlineHome } from "react-icons/ai"
 import UpdateTimes from "./UpdateTimes";
 import useSubmit from "../hooks/useSubmit";
+import { useEffect } from "react";
+
 
 
 function BookingPage() {
@@ -37,11 +42,11 @@ function BookingPage() {
             occasion: ''
         },
         onSubmit: (values) => {
-            submit('https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js', values)
+            submit(values)
         },
         validationSchema: Yup.object().shape({
             name: Yup.string()
-                .min(2, 'First name must be at least 2 characters long')
+                .min(2, 'name must be at least 2 characters long')
                 .required("Required"),
             email: Yup.string()
                 .email("Invalid email address")
@@ -57,17 +62,21 @@ function BookingPage() {
 
     });
 
-    // useEffect(() => {
-    //     if (response) {
-    //         onOpen(response.type, response.message);
-    //         if (response.type === "success") {
-    //             formik.resetForm()
-    //         }
-    //     }
-    // }, [response])
+    useEffect(() => {
+        if (response) {
+            if (response.type === "success") {
+                formik.resetForm()
+            }
+        }
+    }, [response])
 
     return <>
-
+        {response ?
+            <Alert status={response.type}>
+                <AlertIcon />
+                {response.message}
+            </Alert>
+            : ""}
         <VStack p={32} alignItems="flex-start">
             <HStack display="flex"
                 w="100%"
