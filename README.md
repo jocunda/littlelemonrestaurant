@@ -1,6 +1,7 @@
 # Little Lemon Restaurant
 
 Project from course Front-End Developer by Meta, which requirement is to build website of homepage and reservation form for Little Lemon Restaurant.
+Some point to highlighted is semantic, styling, responsive, component, form, unit testing and validation.
 
 - 🍞 Framework : React 18.2.0
 - 🥪 Library : Chakra UI, React Router, Formik, Yup
