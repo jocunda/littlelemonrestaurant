@@ -38,7 +38,7 @@ function BookingPage() {
             email: '',
             date: '',
             time: '',
-            guests: 0,
+            guests: 1,
             occasion: ''
         },
         onSubmit: (values) => {
@@ -53,10 +53,7 @@ function BookingPage() {
                 .required("Required"),
             date: Yup.string(),
             time: Yup.string(),
-            guests: Yup.string()
-                .min(1, "Must be at least 1 guest")
-                .max(10, "Maximum 10 guests")
-                .required("Required"),
+            guests: Yup.string(),
             occasion: Yup.string()
         }),
 
@@ -123,16 +120,15 @@ function BookingPage() {
                             <UpdateTimes />
                         </HStack>
 
-                        <FormControl isInvalid={formik.touched.guests && formik.errors.guests}>
+                        <FormControl>
                             <FormLabel htmlFor="guests">Number of guests</FormLabel>
-                            <NumberInput max={10} min={1}>
+                            <NumberInput defaultValue={1} max={10} min={1}>
                                 <NumberInputField />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
                                 </NumberInputStepper>
                             </NumberInput>
-                            {formik.errors.guests ? <FormErrorMessage>{formik.errors.guests}</FormErrorMessage> : null}
                         </FormControl>
                         <FormControl>
                             <FormLabel htmlFor="occasion">Occasion</FormLabel>
