@@ -8,10 +8,12 @@ Project from course Front-End Developer by Meta, which requirement is to build w
 
 **Web Layout**
 
-<img src="" width="350px">
+<img src="https://github.com/jocunda/littlelemonrestaurant/blob/main/src/assets/readme-images/1.gif" width="350px">
 
 **Mobile Layout**
 
-<img src="" width="200px">
+<img src="https://github.com/jocunda/littlelemonrestaurant/blob/main/src/assets/readme-images/2.gif" width="200px">
 
 **Form Validation**
+
+<img src="https://github.com/jocunda/littlelemonrestaurant/blob/main/src/assets/readme-images/3.png" width="200px">
